@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :books
   resources :users do
     collection do
       post :sign_in
@@ -7,6 +6,8 @@ Rails.application.routes.draw do
       get  :home
     end
   end
+
+  resources :books
 
   root 'users#new'
 
