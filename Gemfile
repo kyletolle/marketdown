@@ -27,6 +27,7 @@ gem 'haml'
 gem 'sass'
 gem 'foreman'
 
+gem 'kramdown-rails'
 gem 'surrounded-rails'
 
 # Use ActiveModel has_secure_password
