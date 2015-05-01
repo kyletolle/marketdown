@@ -6,6 +6,7 @@
   %strong Published By:
   = @book.user.name
 
-%p= @book.content
-
 #{link_to 'Edit', edit_book_path(@book)} | #{link_to 'Back', books_path}
+
+%p= MarkdownRendering.new(@book).book_as_html
+
