@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user,        only: [:show, :edit, :update, :destroy]
+  before_action :prepare_session, only: [:sign_in, :sign_out]
 
   def sign_in
     user_name = user_params[:name]
     @user = UserFinder.new(user_name).find
 
-    session.extend(Surrounded)
     Sessioning.new(@user, session)
       .sign_in
 
@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   end
 
   def sign_out
-    session.extend(Surrounded)
     Sessioning.new(current_user, session)
       .sign_out
 
@@ -93,5 +92,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params[:user]
+    end
+
+    def prepare_session
+      session.extend(Surrounded)
     end
 end
