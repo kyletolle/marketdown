@@ -1,0 +1,11 @@
+#notice= notice
+
+%h2= @book.title
+
+%h3
+  %strong Published By:
+  = @book.user.name
+
+%p= @book.content
+
+#{link_to 'Edit', edit_book_path(@book)} | #{link_to 'Back', books_path}

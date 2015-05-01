@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :books
   resources :users do
     collection do
       post :sign_in

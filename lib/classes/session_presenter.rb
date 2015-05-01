@@ -6,7 +6,7 @@ class SessionPresenter
   end
 
   def links
-    @current_user ? 'sign_out_links' : 'sign_in_links'
+    @current_user ? 'users/sign_out_links' : 'users/sign_in_links'
   end
 end
 
