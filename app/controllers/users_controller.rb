@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def sign_in
-    user_name = params[:user][:name]
+    user_name = user_params[:name]
     @user = UserFinder.new(user_name).find
 
     session.extend(Surrounded)
