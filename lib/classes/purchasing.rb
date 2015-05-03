@@ -4,7 +4,7 @@ class Purchasing
   initialize :purchaser, :book
 
   role :book do
-    def belongs_to_purchaser?
+    def was_written_by_purchaser?
       self.author == purchaser
     end
   end
@@ -17,8 +17,8 @@ class Purchasing
 
   trigger :complete_purchase do
     return false unless purchaser
-    return false if book.belongs_to_purchaser?
     return false if purchaser.has_already_purchased_book?
+    return false if book.was_written_by_purchaser?
 
     purchase = Purchase.new(purchaser: purchaser, book: book)
     purchase.save
