@@ -10,21 +10,21 @@ class Purchasing
   end
 
   role :purchaser do
-    def has_already_purchased_book?
+    def owns_book?
       Purchase.where(purchaser: self, book: book).count > 0
     end
   end
 
   trigger :complete_purchase do
     return false unless purchaser
-    return false if purchaser.has_already_purchased_book?
     return false if book.was_written_by_purchaser?
+    return false if purchaser.owns_book?
 
     purchase = Purchase.new(purchaser: purchaser, book: book)
     purchase.save
   end
 
   trigger :purchaser_owns_book? do
-    return purchaser.has_already_purchased_book?
+    return purchaser.owns_book?
   end
 end
