@@ -4,5 +4,7 @@ class Book < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
 
   validates :author, presence: true
+
+  has_many :purchases
 end
 
