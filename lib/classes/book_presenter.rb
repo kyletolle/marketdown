@@ -1,5 +1,4 @@
 class BookPresenter
-
   attr_reader :book, :view
 
   def initialize(book, view)
@@ -12,20 +11,20 @@ class BookPresenter
   def index_haml(current_user)
     self.current_user = current_user
 
-    book_index_haml = <<-EOB
+    book_index_haml = <<EOB
 %tr
   %td= book.title
   %td= book.author.name
-  #{read_link}
-  #{action_links}
-    EOB
+#{read_link}
+#{action_links}
+EOB
     Haml::Engine.new(book_index_haml).render(self)
   end
 
 private
   def read_link
 <<HAML
-%td= view.link_to 'Read', book
+  %td= view.link_to 'Read', book
 HAML
   end
 
@@ -34,16 +33,16 @@ HAML
     reader_can_purchase = !!current_user
     if user_is_author
 <<HAML
-%td= view.link_to 'Edit', view.edit_book_path(book)
-%td= view.link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' }
+  %td= view.link_to 'Edit', view.edit_book_path(book)
+  %td= view.link_to('Delete', book, method: :delete, data: { confirm: 'Are you sure?' })
 HAML
     elsif reader_can_purchase
 <<HAML
-%td= view.link_to 'Purchase', '#'
+  %td= view.link_to 'Purchase', '#'
 HAML
     else
 <<HAML
-%td &nbsp;
+  %td &nbsp;
 HAML
     end
   end
