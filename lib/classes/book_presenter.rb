@@ -45,15 +45,21 @@ HAML
 
   def action_links(&block)
     user_is_author      = current_user == book.author
-    reader_can_purchase = !!current_user
+    reader_is_signed_in = !!current_user
     links               = []
 
     if user_is_author
       links << edit_link
       links << delete_link
 
-    elsif reader_can_purchase
-      links << purchase_link
+    elsif reader_is_signed_in
+      user_has_purchased_book = Purchase.where(purchaser_id: current_user.id, book_id: book.id).count == 1
+      if user_has_purchased_book
+        links << %{You own this book!}
+
+      else
+        links << purchase_link
+      end
     end
 
     if block_given?
@@ -72,6 +78,6 @@ HAML
   end
 
   def purchase_link
-    view.link_to 'Purchase', '#'
+    view.link_to 'Purchase', view.purchase_book_path(book), method: :post, data: { confirm: 'Are you sure you want to purchase this book?' }
   end
 end
