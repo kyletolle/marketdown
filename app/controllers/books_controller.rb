@@ -31,7 +31,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if book_published
-        format.html { redirect_to @book, notice: 'You now own this book!' }
+        format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
 
       else
@@ -72,7 +72,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if purchase_completed
-        format.html { redirect_to @book, notice: 'Book was successfully purchased.' }
+        format.html { redirect_to @book, notice: 'You now own this book!' }
         format.json { render :show, status: :ok, location: @book }
 
       else
