@@ -11,13 +11,7 @@
 
   %tbody
     - @books.each do |book|
-      %tr
-        %td= book.title
-        %td= book.user.name
-        %td= link_to 'Show', book
-        %td= link_to 'Edit', edit_book_path(book)
-        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
-
+      = BookPresenter.new(book, self).index_haml(current_user)
 %br
 
 #{link_to 'New Book', new_book_path}
