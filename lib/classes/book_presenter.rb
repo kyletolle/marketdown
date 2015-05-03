@@ -53,7 +53,7 @@ HAML
       links << delete_link
 
     elsif reader_is_signed_in
-      user_has_purchased_book = Purchase.where(purchaser_id: current_user.id, book_id: book.id).count == 1
+      user_has_purchased_book = Purchase.where(purchaser: current_user, book: book).count == 1
       if user_has_purchased_book
         links << %{You own this book!}
 
