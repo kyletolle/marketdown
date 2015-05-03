@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :books
+  resources :books do
+    member do
+      post :purchase
+    end
+  end
 
   root 'users#new'
 
