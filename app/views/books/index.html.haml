@@ -11,7 +11,7 @@
 
   %tbody
     - @books.each do |book|
-      = BookPresenter.new(book, self).index_haml(current_user)
+      = BookPresenter.new(book, self).for_index(current_user)
 %br
 
 #{link_to 'New Book', new_book_path}

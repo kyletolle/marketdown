@@ -8,26 +8,26 @@ class BookPresenter
 
   attr_accessor :current_user
 
-  def index_haml(current_user)
+  def for_index(current_user)
     @current_user = current_user
 
     book_index_haml = <<HAML
 %tr
-  %td= book.title
-  %td= book.author.name
+  %td #{book.title}
+  %td #{book.author.name}
   %td #{read_link}
 #{index_action_links}
 HAML
-    Haml::Engine.new(book_index_haml).render(self)
+    Haml::Engine.new(book_index_haml).render
   end
 
-  def show_haml(current_user)
+  def links_for_show(current_user)
     @current_user = current_user
 
     book_show_haml = <<HAML
 #{action_links.join(' ')}
 HAML
-    Haml::Engine.new(book_show_haml).render(self)
+    Haml::Engine.new(book_show_haml).render
   end
 
 private
