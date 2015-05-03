@@ -15,7 +15,7 @@ class BookPresenter
 %tr
   %td= book.title
   %td= book.author.name
-#{index_read_link}
+  %td #{read_link}
 #{index_action_links}
 HAML
     Haml::Engine.new(book_index_haml).render(self)
@@ -31,12 +31,6 @@ HAML
   end
 
 private
-  def index_read_link
-<<HAML
-  %td #{read_link}
-HAML
-  end
-
   def read_link
     view.link_to 'Read', book
   end
