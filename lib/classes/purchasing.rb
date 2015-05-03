@@ -16,8 +16,11 @@ class Purchasing
   end
 
   trigger :complete_purchase do
+    # If there's no user logged in, we can't allow someone to buy it.
     return false unless purchaser
+    # An author can't buy their own book.
     return false if book.was_written_by_purchaser?
+    # People can't purchase the book more than once.
     return false if purchaser.owns_book?
 
     purchase = Purchase.new(purchaser: purchaser, book: book)
