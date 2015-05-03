@@ -60,6 +60,9 @@ HAML
       else
         links << purchase_link
       end
+
+    else
+      links << sign_in_to_purchase_link
     end
 
     if block_given?
@@ -79,5 +82,9 @@ HAML
 
   def purchase_link
     view.link_to 'Purchase', view.purchase_book_path(book), method: :post, data: { confirm: 'Are you sure you want to purchase this book?' }
+  end
+
+  def sign_in_to_purchase_link
+    view.link_to "Sign in to Purchase", :root
   end
 end
