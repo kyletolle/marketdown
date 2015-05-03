@@ -1,8 +1,8 @@
 class Book < ActiveRecord::Base
   include Surrounded
 
-  belongs_to :user
+  belongs_to :author, class_name: 'User'
 
-  validates :user, presence: true
+  validates :author, presence: true
 end
 
