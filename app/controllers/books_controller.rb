@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :purchase]
   before_action :validate_logged_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :destroy, :purchase]
 
   # GET /books
   # GET /books.json
@@ -46,7 +46,11 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1.json
   def update
     respond_to do |format|
-      if @book.update(book_params)
+      book_updater = UpdateBook.new(current_user, params[:id], book_params)
+      book_updated = book_updater.update
+      @book = book_updater.book
+
+      if book_updated
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
 
