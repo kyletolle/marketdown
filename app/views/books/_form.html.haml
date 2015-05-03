@@ -16,6 +16,6 @@
   .field
     = f.label :content
     %br
-    = f.text_area :content
+    = f.text_area :content, value: f.object.content.html_safe
   .actions
     = f.submit 'Publish'
