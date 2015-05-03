@@ -23,4 +23,8 @@ class Purchasing
     purchase = Purchase.new(purchaser: purchaser, book: book)
     purchase.save
   end
+
+  trigger :purchaser_owns_book? do
+    return purchaser.has_already_purchased_book?
+  end
 end
