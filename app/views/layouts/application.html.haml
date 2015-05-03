@@ -12,5 +12,9 @@
       = render SessionPresenter.new(current_user).links
     .clear
 
+  #notice
+    %p= notice
+  #alert
+    %p=  alert
   = yield
 
