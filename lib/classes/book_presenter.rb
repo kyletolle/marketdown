@@ -46,10 +46,12 @@ HAML
   def action_links(&block)
     user_is_author      = current_user == book.author
     reader_can_purchase = !!current_user
-    links = []
+    links               = []
+
     if user_is_author
       links << edit_link
       links << delete_link
+
     elsif reader_can_purchase
       links << purchase_link
     end
