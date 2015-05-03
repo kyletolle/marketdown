@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :purchase]
+  before_action :validate_logged_in, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /books
   # GET /books.json
@@ -91,5 +92,12 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:title, :content, :user_id)
+    end
+
+    def validate_logged_in
+      unless current_user
+        flash[:notice] = "You must log in first."
+        redirect_to :root
+      end
     end
 end
