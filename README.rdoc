@@ -28,3 +28,7 @@ git push && git push heroku
 heroku open --app your-marketdown-instance
 ```
 
+## License
+
+MIT
+
